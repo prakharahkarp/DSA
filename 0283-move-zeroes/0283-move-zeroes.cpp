@@ -14,9 +14,9 @@ public:
                 nonzeroPos++;
                 }
             }
-        for(;nonzeroPos<nums.size();nonzeroPos++){
-            nums[nonzeroPos]=0;
-        }
+        // for(;nonzeroPos<nums.size();nonzeroPos++){
+        //     nums[nonzeroPos]=0;
+        // }
     }
 };
 
