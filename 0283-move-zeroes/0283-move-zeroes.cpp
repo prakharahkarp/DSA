@@ -1,18 +1,23 @@
 class Solution {
 public:
+    void swap(int pos1,int pos2,vector<int>& nums){
+        int temp=nums[pos1];
+        nums[pos1]=nums[pos2];
+        nums[pos2]=temp;
+    }
+    
     void moveZeroes(vector<int>& nums) {
-        int zeroesFilled=0;
-        for(int i=0;i<nums.size()-zeroesFilled;i++){
-            if(!nums[i]){
-                for(int j=i+1;j<nums.size()-zeroesFilled;j++){
-                    nums[j-1]=nums[j];
+        int nonzeroPos=0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]){
+                swap(i,nonzeroPos,nums);
+                nonzeroPos++;
                 }
-                i--;
-                nums[nums.size()-zeroesFilled-1]=0;
-                zeroesFilled++;
             }
+        for(;nonzeroPos<nums.size();nonzeroPos++){
+            nums[nonzeroPos]=0;
         }
     }
 };
 
-// approach 1 is to check every index and if we find a zero, puhs every element one position back and placing a zero at the end
+// approach 2 is to use a pointer that points to places where non-zero elements must reside and whenever we find a non-zero element, we move it to this position and increase the pos value by 1. In the end we just make all remaining elemnets 0
