@@ -22,3 +22,4 @@ public:
 };
 
 // approach 1 find the min element in the array and starting from this element, search the complete array in circular manner such that there should be no elements nums[i]>nums[i+1]
+// now if this returns false, then we check for minEle in the end of the array and starting from this new minElePos, we do another search and return the result
