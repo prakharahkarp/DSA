@@ -11,6 +11,9 @@ public:
             }
             // k--;
         }
+//         if(j==0) the first m elements are already ordered correctly in nums1
+//         if(i==0) then only j is left to be added in nums1 and hence it will be added
+//         if(i>0 && j>0) then the above loop wont exit
         while(j>=0){
             nums1[k--]=nums2[j--];
         }
