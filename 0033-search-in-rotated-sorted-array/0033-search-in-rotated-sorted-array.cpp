@@ -18,14 +18,14 @@ public:
         int pivot=binSearch(nums,-1,nums.size(),lastEle);
         cout<<pivot<<"\n";
         int l,r;
-        if(target>lastEle) l=0,r=pivot-1;
-        else l=pivot,r=nums.size()-1;
-        while(r>=l){
+        if(target>lastEle) l=-1,r=pivot;
+        else l=pivot-1,r=nums.size();
+        while(r>l+1){
             int mid=l+(r-l)/2;
-            if(nums[mid]==target) return mid;
-            else if(nums[mid]<target) l=mid+1;
-            else r=mid-1;
+            if(nums[mid]>=target) r=mid;
+            else l=mid;
         }
+        if(r>=0&&r<nums.size()&&nums[r]==target) return r;
         return -1;
     }
 };
