@@ -7,14 +7,13 @@ public:
             if(arr[mid]-mid-1>=k) r=mid;
             else l=mid+1;
         }
-        int missingCnt=arr[r]-r-1,ele=arr[r];
-        if(missingCnt<k) return ele+k-missingCnt;
-        while(missingCnt>=k){
-            ele--;
-            missingCnt--;
-        }
-        
-        return ele;
+        // int missingCnt=arr[r]-r-1,ele=arr[r];
+        // if(missingCnt<k) return ele+k-missingCnt;
+        int start=arr[r],missingCnt=arr[r]-r-1;
+        if(missingCnt<k) return start+(k-missingCnt);
+        return start-(missingCnt-k+1);
+        // cout<<start<<" "<<missingCnt<<"\n";
+        // return start+missingCnt;
     }
 };
 
