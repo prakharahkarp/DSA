@@ -12,22 +12,19 @@ class Solution {
 public:
     vector<ListNode*> splitListToParts(ListNode* head, int k) {
         vector<ListNode*> ans(k, nullptr);
-        ListNode *curr = head, *temp = head;
+        ListNode *curr = head, *temp;
         int countNodes = 0;
         while(curr != NULL){
             countNodes++;
             curr = curr->next;
         }
-        curr = head;
-        // cout<<countNodes<<"\n";
         if(countNodes == 0) return ans;
+        curr = head;
         int groupSize, rem = countNodes, remGroups = k, ind = 0;
         while(rem != 0){
             int count = 0;
             ans[ind++] = curr;
-            groupSize = rem % remGroups == 0 ? rem / remGroups : rem / remGroups + 1;
-            // cout<<rem<<"\n";
-            // cout<<groupSize<<" ";
+            groupSize = ceil((double)rem / remGroups);
             while(count < groupSize-1){
                 count++;
                 curr = curr->next;
