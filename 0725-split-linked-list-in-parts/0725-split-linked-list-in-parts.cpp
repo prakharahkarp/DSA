@@ -18,7 +18,6 @@ public:
             countNodes++;
             curr = curr->next;
         }
-        if(countNodes == 0) return ans;
         curr = head;
         int groupSize, rem = countNodes, remGroups = k, ind = 0;
         while(rem != 0){
