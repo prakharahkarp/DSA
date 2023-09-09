@@ -38,7 +38,6 @@ public:
             currA = currA->next;
             currB = currB->next;
         }
-        cout<<countA<<" "<<countB<<"\n";
         return intersectionNode;
     }
 };
