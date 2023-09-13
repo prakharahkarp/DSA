@@ -22,7 +22,7 @@ public:
         else delSame1 = minElePos + 1;
         if(n - minElePos < n - maxElePos) delSame2 = n - maxElePos;
         else delSame2 = n - minElePos;
-        cout << delOpp << " " << delSame1 << " " << delSame2 << "\n";
+        // cout << delOpp << " " << delSame1 << " " << delSame2 << "\n";
         return min({delOpp, delSame1, delSame2});
     }
 };
