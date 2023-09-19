@@ -46,11 +46,6 @@ public:
         }
         temp = partHead; //2
         partHead = reverseLL(partHead); //4
-        // while(partHead != nullptr){
-        //     cout<<partHead->val<<" ";
-        //     partHead = partHead->next;
-        // }
-        // cout<<"\n";
         if(left == 1){
             head = partHead;
         }
