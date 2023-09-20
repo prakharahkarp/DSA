@@ -41,12 +41,7 @@ public:
         if(leftLimit == -1 && suffix == x){
             ans = min((int)nums.size() - rightLimit, ans);
         }
-//         if((leftLimit == -1 && ans > 0)||(rightLimit == -1 && ans > 0)) return ans;
         
-//         for(int i = 0; i < temp.size();i++){
-//             cout<<temp[i]<<" ";
-//         }
-        // cout<<"\n";
         int windowStart = 0, windowEnd = 1;
         long long windowSum = temp[0];
         while(windowStart < temp.size()){
@@ -66,10 +61,3 @@ public:
         return -1;
     }
 };
-// 2 3 1 1 
-
-// 3 5 25 26 27 30
-// 30 27  25 5 4 3 
-    
-// 1 2 6 8 11
-// 11 10 9 5 3
