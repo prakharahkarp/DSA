@@ -35,13 +35,6 @@ public:
             else break;
         }
 
-        // if(rightLimit == -1 && prefix == x){
-            // ans = min({(int)nums.size() - rightLimit, leftLimit + 1, ans});
-        // }
-        // if(leftLimit == -1 && suffix == x){
-            // ans = min((int)nums.size() - rightLimit, ans);
-        // }
-        
         int windowStart = 0, windowEnd = 1;
         long long windowSum = temp[0];
         while(windowStart < temp.size()){
