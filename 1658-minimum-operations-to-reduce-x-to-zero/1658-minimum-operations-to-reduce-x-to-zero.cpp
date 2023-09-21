@@ -1,52 +1,63 @@
 class Solution {
 public:
-    void reverse(vector<int>& temp){
-        int i = 0, j = temp.size()-1;
-        while(j > i){
-            swap(temp[i], temp[j]);
-            i++;
-            j--;
-        }
-    }
-    
     int minOperations(vector<int>& nums, int x) {
         if(nums[0] > x && nums[nums.size()-1] > x) return -1;
         
-        vector<int> temp;
         long long prefix = 0, suffix = 0;
         int leftLimit = -1, rightLimit = -1, ans = nums.size(); 
-        for(int i = nums.size()-1; i >= 0; i--){
-            if(suffix + nums[i] <= x){
-                suffix += nums[i];
-                rightLimit = i;
-                temp.push_back(nums[i]);
-            }
-            else break;
-        }
-        if(rightLimit == 0 && suffix == x) return ans;
-        else if(rightLimit == 0) return -1;
-        reverse(temp);
+        
         for(int i = 0; i < nums.size(); i++){
             if(prefix + nums[i] <= x){
                 prefix += nums[i];
                 leftLimit = i;
-                temp.push_back(nums[i]);
             }
             else break;
         }
-
-        int windowStart = 0, windowEnd = 1;
-        long long windowSum = temp[0];
-        while(windowStart < temp.size()){
+        if(leftLimit == nums.size() - 1){
+            if(prefix == x) return nums.size();
+            return -1;
+        }
+        
+        for(int i = nums.size()-1; i >= 0; i--){
+            if(suffix + nums[i] <= x){
+                suffix += nums[i];
+                rightLimit = i;
+            }
+            else break;
+        }
+        
+        if(prefix == x) ans = min(ans, leftLimit + 1);
+        if(suffix == x) ans = min(ans, (int)nums.size() - rightLimit);
+        if(rightLimit == -1){
+            if(prefix == x) return ans;
+            return -1;
+        }
+        if(leftLimit == -1){
+            if(suffix == x) return ans;
+            return -1;
+        }
+        int windowStart = rightLimit, windowEnd = 0, currWindowLen = nums.size() - rightLimit;
+        long long windowSum = suffix + nums[windowEnd++];
+        currWindowLen++;
+        while(true){
+            if(windowStart == nums.size() && windowSum == x){
+                ans = min(currWindowLen, ans);
+                break;
+            }
             if(windowSum == x){
-                ans = min(windowEnd - windowStart, ans);
-                windowSum -= temp[windowStart++];
+                ans = min(currWindowLen, ans);
+                windowSum -= nums[windowStart++];
+                currWindowLen--;  
             }
             else if(windowSum > x){
-                windowSum -= temp[windowStart++];
+                windowSum -= nums[windowStart++];
+                currWindowLen--;
             }
             else{
-                if(windowEnd < temp.size()) windowSum += temp[windowEnd++];
+                if(windowEnd <= leftLimit){
+                    windowSum += nums[windowEnd++];
+                    currWindowLen++;
+                }
                 else break;
             }
         }
@@ -54,3 +65,5 @@ public:
         return -1;
     }
 };
+
+// My first intuition was to use binary search to find window size and for every mid, find the prefix sum, suffix sum and the circular sum using sliding window technique and if any of these equal to x such that the number of elements included are equal to the window size, I return true otherwise I return false. But this approach is wrong as it does not give the optimal answers. Although I know, that this solution can be solved using Binary Search but I could not solve it.
