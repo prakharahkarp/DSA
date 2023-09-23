@@ -16,25 +16,24 @@ public:
             return nullptr;
         }
         int countNodes = 0;
-        ListNode *curr = head, *temp = nullptr;
+        ListNode *curr = head, *temp = nullptr, *prev = head;
+//         curr is used to traverse the LL, temp temporarily stores the node to be deleted and prev stores the nodes just before the node to be deleted
         while(curr != nullptr){
+            if(countNodes > n){
+                prev = prev->next;
+            }
             countNodes++;
             curr = curr->next;
         }
+        
         if(n == countNodes){
             temp = head;
             head = head->next;
-            delete temp;
-            return  head;
         }
-        curr = head;
-        int count = 0;
-        while(count < countNodes - n - 1){
-            count++;
-            curr = curr->next;
+        else{
+            temp = prev->next;
+            prev->next = prev->next->next;
         }
-        temp = curr->next;
-        curr->next = curr->next->next;
         delete temp;
         return head;
     }
