@@ -42,6 +42,7 @@ public:
         }
         
 //         reversing the later half of the LL, so that we can compare the ith node from the beginning and end easily
+//         we have made the next of the reversed head of second half of linked list as nullptr, so it has been disconnected from the rest of the LL. This helps us in easy traversal of the LL and gives us a stopping condition
         ListNode *revHead = reverse(nullptr, slow);
         ListNode* curr = head, *revCurr = revHead;
         
