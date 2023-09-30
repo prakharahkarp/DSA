@@ -8,11 +8,11 @@ public:
         return ind;
     }
     
-    int convertToNum(int ind, string& s,long long ans, unordered_set<char>& digits){
+    int convertToNum(int ind, string& s,int ans, unordered_set<char>& digits){
 //         helps us in converting digit string to a signed number
-        if(flag && -1 * ans <= INT_MIN) return INT_MIN;
-        if(!flag && ans >= INT_MAX) return INT_MAX;
         if((ind == s.size())||(digits.find(s[ind]) == digits.end())) return ans;
+        if((flag == 1) && (((-1 * ans == INT_MIN/10) && ((s[ind] - '0') >= 8)) || (-1 * ans < INT_MIN/10))) return INT_MIN;
+        if((flag == 0) && (((ans == INT_MAX/10) && ((s[ind] - '0') >= 7)) || (ans > INT_MAX/10))) return INT_MAX;
         ans = ans * 10 + (s[ind] - '0');
         return convertToNum(ind + 1, s, ans, digits);
     }
