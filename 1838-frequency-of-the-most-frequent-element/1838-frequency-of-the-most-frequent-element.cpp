@@ -3,7 +3,8 @@ public:
     int maxFrequency(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
         long long windowStart = 0, windowSize = 1, maxWindowSize = 1, curr = 1;
-        long long cost = 0;
+        int cost = 0;
+        cout<<nums.size()<<"\n";
         while(curr < nums.size()){
             if(cost + (nums[curr] - nums[curr - 1]) * (curr - windowStart) <= k){
                 cost += (nums[curr] - nums[curr - 1]) * (curr - windowStart);
