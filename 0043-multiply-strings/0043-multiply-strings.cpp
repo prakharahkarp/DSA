@@ -10,20 +10,20 @@ public:
 
         int i, j, k; 
         // i and j are used to traverse the strings to be multiplied while k is used to traverse the product string
-        int carry = 0, temp_ans = 0;
+        int carry = 0, tempProd = 0;
         for(i = num1.length() - 1; i >= 0 ; i--){
-            int curr1 = num1[i] - '0';
+            int dig1 = num1[i] - '0';
             k = skippedInd - 1;
 //             this way we can easily skip 1 index in each iteration of i
             for(j = num2.size() - 1; j >= 0; j--){
-                int curr2 = num2[j] - '0';
-                temp_ans = curr1 * curr2 + carry + (product[k] - '0');
-                product[k] = (char)('0' + (temp_ans%10));
-                carry = temp_ans/10; 
+                int dig2 = num2[j] - '0';
+                tempProd = dig1 * dig2 + carry + (product[k] - '0');
+                product[k] = (char)('0' + (tempProd%10));
+                carry = tempProd/10; 
                 k--;
             }
-            temp_ans = carry + (product[k] - '0');
-            product[k] = (char)('0' + temp_ans);
+            tempProd = carry + (product[k] - '0');
+            product[k] = (char)('0' + tempProd);
             carry = 0;
             skippedInd--;
         }
