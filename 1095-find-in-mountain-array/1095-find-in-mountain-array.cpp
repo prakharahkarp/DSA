@@ -11,30 +11,46 @@
 class Solution {
 public:
     int findInMountainArray(int target, MountainArray &mountainArr) {
-        int l=-1,r=mountainArr.length();
-        while(r>l+1){
-            int mid=l+(r-l)/2;
-            if(mountainArr.get(mid)>mountainArr.get(mid+1)) r=mid;
-            else l=mid;
+        
+        // finding peak index
+        int len = mountainArr.length();
+        int l = 1, r = len - 2; // as our peak index can not be 0 or len - 1(given)
+        int peakInd = -1;
+        while(r >= l){
+            int mid = l + (r - l)/2;
+            int ele1 = mountainArr.get(mid - 1), ele2 = mountainArr.get(mid), ele3 = mountainArr.get(mid + 1);
+            if(ele1 < ele2 && ele2 > ele3){
+                peakInd = mid;
+                break;
+            }
+            else if(ele1 < ele2 && ele2 < ele3){
+                l = mid + 1;
+            }
+            else r = mid - 1;
         }
-        cout<<r<<"\n";
-        int peak=r;
-        l=0,r=peak;
-        while(r>=l){
-            int mid=l+(r-l)/2;
-            int currentElement=mountainArr.get(mid);
-            if(currentElement==target) return mid;
-            else if(currentElement>target) r=mid-1;
-            else l=mid+1;
+        if(mountainArr.get(peakInd) == target) return peakInd;
+        
+        // searching in the increasing array
+        l = 0, r = peakInd - 1;
+        while(r >= l){
+            int mid = l + (r - l)/2;
+            int ele = mountainArr.get(mid);
+            if(ele == target) return mid;
+            else if(ele < target) l = mid + 1;
+            else r = mid - 1;
         }
-        l=peak+1,r=mountainArr.length()-1;
-        while(r>=l){
-            int mid=l+(r-l)/2;
-            int currentElement=mountainArr.get(mid);
-            if(currentElement==target) return mid;
-            else if(currentElement>target) l=mid+1;
-            else r=mid-1;
+        
+//         searching in the decreasing array
+        l = peakInd + 1, r = len - 1;
+        while(r >= l){
+            int mid = l + (r - l)/2;
+            int ele = mountainArr.get(mid);
+            if(ele == target) return mid;
+            else if(ele < target) r = mid - 1;
+            else l = mid + 1;
         }
+        
+//         element not found 
         return -1;
     }
 };
