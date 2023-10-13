@@ -16,8 +16,17 @@ class Solution{
             totalSteps++;
             return ;
         }
-        helper(N - 1, from, aux, to, ++totalSteps);
+        // helper(N - 1, from, aux, to, ++totalSteps);
+        // cout << "move disk " << N << " from rod " << from << " to rod " << to <<"\n";
+        // helper(N - 1, aux, to, from, ++totalSteps);
+        
+        // earlier we were incrementing totalsteps multiple times for one valid move(while placing the n-1 discs on top of the nth to be specific) and hence our answer
+        // was greter than the correct answer(greater by n-1) to be specific
+        // the new code increases totalsteps once for each valid move
+        
+        helper(N - 1, from, aux, to, totalSteps);
         cout << "move disk " << N << " from rod " << from << " to rod " << to <<"\n";
+        totalSteps++;
         helper(N - 1, aux, to, from, totalSteps);
     }
     
