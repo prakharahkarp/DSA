@@ -1,9 +1,8 @@
 class Solution {
 public:
-    void generateSubsets(int ind, vector<int> temp, set<vector<int>> &uniqueSubsets, vector<int> &nums){
+    void generateSubsets(int ind, vector<int> &temp, vector<vector<int>> &uniqueSubsets, vector<int> &nums){
         if(ind == nums.size()){
-            sort(temp.begin(), temp.end());
-            uniqueSubsets.insert(temp);
+            uniqueSubsets.push_back(temp);
             return ;
         }
 
@@ -13,21 +12,19 @@ public:
 
         // not pick
         temp.pop_back();
-        generateSubsets(ind + 1, temp, uniqueSubsets, nums);
+        ind = upper_bound(nums.begin(), nums.end(), nums[ind]) - nums.begin();
+        generateSubsets(ind, temp, uniqueSubsets, nums);
     }
     
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        set<vector<int>> uniqueSubsets;
+        
+        vector<vector<int>> uniqueSubsets;
         vector<int> temp;
+        
+        sort(nums.begin(), nums.end());
 
         generateSubsets(0, temp, uniqueSubsets, nums);
-
-        vector<vector<int>> subsets;
-    
-        for(auto it : uniqueSubsets){
-            subsets.push_back(it);
-        }
         
-        return subsets;
+        return uniqueSubsets;
     }
 };
