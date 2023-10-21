@@ -9,9 +9,10 @@ public:
         // pick
         temp.push_back(nums[ind]);
         generateSubsets(ind + 1, temp, uniqueSubsets, nums);
+        temp.pop_back();
 
         // not pick
-        temp.pop_back();
+        // when not picking a ind, we ignore all indices with (value == nums[ind]). This helps in ensuring that we do not generate            a duplicate subset
         ind = upper_bound(nums.begin(), nums.end(), nums[ind]) - nums.begin();
         generateSubsets(ind, temp, uniqueSubsets, nums);
     }
