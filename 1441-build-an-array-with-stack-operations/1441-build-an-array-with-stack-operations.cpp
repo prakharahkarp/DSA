@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<string> buildArray(vector<int>& target, int n) {
-        stack<int> st;
         vector<string> ans;
         int j = 0;
         for(int i = 1; i <= n; i++){
