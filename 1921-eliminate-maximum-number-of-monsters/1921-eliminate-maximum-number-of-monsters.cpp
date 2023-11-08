@@ -12,6 +12,7 @@ public:
             if(time[t] > t)  countDefeatedMonsters++;
             else break;
         }
+//         once your weapon is fully charged, you can go to the monster's location and kill it
         return countDefeatedMonsters;
     }
 };
