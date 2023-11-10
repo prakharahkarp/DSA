@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void BFS(int src, map<int, vector<int>>& mp, int n, unordered_map<int, int>& visited, vector<int>& ans){
+    void BFS(int src, unordered_map<int, vector<int>>& mp, int n, unordered_map<int, int>& visited, vector<int>& ans){
         queue<int> q;
         q.push(src);
         visited[src] = 1;
@@ -19,7 +19,7 @@ public:
     
     vector<int> restoreArray(vector<vector<int>>& adjacentPairs) {
         int n = adjacentPairs.size();
-        map<int, vector<int>> mp;
+        unordered_map<int, vector<int>> mp;
         unordered_map<int, int> visited;
         int src;
 //         creating an adjacency matrix for our pairs
