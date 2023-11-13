@@ -3,8 +3,9 @@ public:
     string sortVowels(string s) {
         vector<char> vowels;
 
+        string temp = "AEIOUaeiou";
         for(auto ch : s){
-            if(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || ch == 'a' ||ch == 'e' ||ch == 'i' || ch == 'o' || ch == 'u') vowels.push_back(ch);
+            if(temp.find(ch) != string::npos) vowels.push_back(ch);
         }
 
         sort(vowels.begin(), vowels.end());
@@ -13,7 +14,7 @@ public:
 
         for(auto& ch : s){
             if(ind == vowels.size()) break;
-            if(ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U' || ch == 'a' ||ch == 'e' ||ch == 'i' || ch == 'o' || ch == 'u') ch = vowels[ind++];
+            if(temp.find(ch) != string::npos) ch = vowels[ind++];
         }
 
         return s;
