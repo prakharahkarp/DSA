@@ -1,49 +1,42 @@
-#include <vector>
-#include <unordered_map>
-#include <unordered_set>
-#include <queue>
-
-using namespace std;
-
 class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
-        if (source == target) return 0;
-
-        unordered_map<int, vector<int>> stopToBuses;
-        unordered_set<int> visitedBuses;
-        unordered_set<int> visitedStops;
-
-        for (int i = 0; i < routes.size(); ++i) {
-            for (int stop : routes[i]) {
-                stopToBuses[stop].push_back(i);
+        
+        if(source == target) return 0;
+        
+        unordered_map<int, vector<int>> adj;
+        unordered_set<int> visitedStops, visitedRoutes;
+        queue<pair<int, int>> q;
+        
+        for(int i = 0; i < routes.size(); i++){
+            for(int j = 0; j < routes[i].size(); j++){
+                adj[routes[i][j]].push_back(i);
+                if(routes[i][j] == source){
+                    q.push({1,i});
+                    visitedRoutes.insert(i);
+                    visitedStops.insert(routes[i][j]);
+                }
             }
         }
-
-        queue<pair<int, int>> q;
-        q.push({source, 0});
-
-        while (!q.empty()) {
-            int currStop = q.front().first;
-            int busChanges = q.front().second;
+        
+        while(!q.empty()){
+            int curr_route = q.front().second;
+            int busChanges = q.front().first;
             q.pop();
-
-            if (currStop == target) return busChanges;
-
-            for (int bus : stopToBuses[currStop]) {
-                if (visitedBuses.count(bus) == 0) {
-                    visitedBuses.insert(bus);
-
-                    for (int nextStop : routes[bus]) {
-                        if (visitedStops.count(nextStop) == 0) {
-                            visitedStops.insert(nextStop);
-                            q.push({nextStop, busChanges + 1});
+            for(auto stop : routes[curr_route]){
+                if(stop == target) return busChanges;
+                if(visitedStops.find(stop) == visitedStops.end()){
+                    visitedStops.insert(stop);
+                    for(auto otherRoutes : adj[stop]){
+                        if(visitedRoutes.find(otherRoutes) == visitedRoutes.end()){
+                            visitedRoutes.insert(otherRoutes);
+                            q.push({busChanges + 1, otherRoutes});
                         }
                     }
                 }
             }
         }
-
-        return -1; // If target is not reachable
+        
+        return -1;
     }
 };
