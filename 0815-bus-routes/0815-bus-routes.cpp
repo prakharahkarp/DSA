@@ -19,6 +19,7 @@ public:
             }
         }
         
+//         BFS
         while(!q.empty()){
             int curr_route = q.front().second;
             int busChanges = q.front().first;
