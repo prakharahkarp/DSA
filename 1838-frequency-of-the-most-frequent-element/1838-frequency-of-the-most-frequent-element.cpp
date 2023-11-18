@@ -10,7 +10,7 @@ public:
                 freq++;
                 curr++;
                 maxFreq = max(maxFreq, freq);
-            } else if(windowStart < curr){
+            } else if(cost > 0){
                 cost -= (nums[curr - 1] - nums[windowStart]);
                 windowStart++;
                 freq--;
