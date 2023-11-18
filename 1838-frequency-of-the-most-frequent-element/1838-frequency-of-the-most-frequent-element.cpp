@@ -5,8 +5,8 @@ public:
         long long windowStart = 0, freq = 1, maxFreq = 1, curr = 1, cost = 0;
 
         while(curr < nums.size()){
-            if(cost + freq * (nums[curr] - nums[curr - 1]) <= k){
-                cost += freq * (nums[curr] - nums[curr - 1]);
+            if(cost + freq * (nums[curr] - nums[max(curr - 1, (long long)0)]) <= k){
+                cost += freq * (nums[curr] - nums[max(curr - 1, (long long)0)]);
                 freq++;
                 curr++;
                 maxFreq = max(maxFreq, freq);
