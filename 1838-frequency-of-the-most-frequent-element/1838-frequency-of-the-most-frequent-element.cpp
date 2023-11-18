@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxFrequency(vector<int>& nums, int k) {
         sort(nums.begin(), nums.end());
-        long long windowStart = 0, freq = 1, maxFreq = 1, curr = 1, cost = 0;
+        long long windowStart = 0, freq = 0, maxFreq = 0, curr = 0, cost = 0;
 
         while(curr < nums.size()){
             if(cost + freq * (nums[curr] - nums[max(curr - 1, (long long)0)]) <= k){
@@ -10,7 +10,7 @@ public:
                 freq++;
                 curr++;
                 maxFreq = max(maxFreq, freq);
-            } else if(cost > 0){
+            } else if(windowStart < curr){
                 cost -= (nums[curr - 1] - nums[windowStart]);
                 windowStart++;
                 freq--;
