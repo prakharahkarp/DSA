@@ -1,11 +1,9 @@
 class Solution {
 public:
     vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
+        
         vector<int> ans;
-        int limitingVal = 0;
-        for(int i = 0; i < nums.size(); i++){
-            limitingVal = max(limitingVal, i + (int)nums[i].size() - 1);
-        }
+        int limitingVal = nums.size() - 1 + nums[0].size() - 1;
         
         for(int sum = 0; sum <= 2 * limitingVal; sum++){
             for(int i = sum, j = 0; i >= 0 && j <= sum; i--, j++){
