@@ -1,24 +1,26 @@
 class Solution {
 public:
-    void generateSubsets(int ind, vector<int>& nums, vector<vector<int>>& res, vector<int>& temp){
-        if(ind >= nums.size()){
-            res.push_back(temp);
+    void findAllUniqueSubsets(vector<int>& nums, int currInd, vector<int>& temp, vector<vector<int>>& ans){
+        
+        if(currInd == nums.size()){
+            ans.push_back(temp);
             return ;
         }
         
-        temp.push_back(nums[ind]);
-        generateSubsets(ind + 1, nums, res, temp);
+//         icnlude curr Index value
+        temp.push_back(nums[currInd]);
+        findAllUniqueSubsets(nums, currInd + 1, temp, ans);
+//         restore original state
         temp.pop_back();
         
-        generateSubsets(ind + 1, nums, res, temp);
+//         do not include curr Index value
+        findAllUniqueSubsets(nums, currInd + 1, temp, ans);
     }
     
     vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
         vector<int> temp;
-        vector<vector<int>> res;
-        
-        generateSubsets(0, nums, res, temp);
-        
-        return res;
+        findAllUniqueSubsets(nums, 0, temp, ans);
+        return ans;
     }
 };
