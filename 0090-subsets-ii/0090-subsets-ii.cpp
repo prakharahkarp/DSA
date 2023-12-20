@@ -1,31 +1,30 @@
 class Solution {
 public:
-    void generateSubsets(int ind, vector<int> &temp, vector<vector<int>> &uniqueSubsets, vector<int> &nums){
-        if(ind == nums.size()){
-            uniqueSubsets.push_back(temp);
+    void findAllUniqueSubsets(vector<int>& nums, int currInd, vector<vector<int>>& ans, vector<int>& temp){
+        
+        if(currInd >= nums.size()){
+            ans.push_back(temp);
             return ;
         }
-
-        // pick
-        temp.push_back(nums[ind]);
-        generateSubsets(ind + 1, temp, uniqueSubsets, nums);
+        
+//         include the current Index value 
+        temp.push_back(nums[currInd]);
+        findAllUniqueSubsets(nums, currInd + 1, ans, temp);
+        
+//         restore current state
         temp.pop_back();
-
-        // not pick
-        // when not picking a ind, we ignore all indices with (value == nums[ind]). This helps in ensuring that we do not generate            a duplicate subset
-        ind = upper_bound(nums.begin(), nums.end(), nums[ind]) - nums.begin();
-        generateSubsets(ind, temp, uniqueSubsets, nums);
+        
+//         don't include any occurrence of current Index value
+        currInd = upper_bound(nums.begin(), nums.end(), nums[currInd]) - nums.begin();
+        findAllUniqueSubsets(nums, currInd, ans, temp);
     }
     
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        
-        vector<vector<int>> uniqueSubsets;
         vector<int> temp;
-        
+        vector<vector<int>> ans;
         sort(nums.begin(), nums.end());
-
-        generateSubsets(0, temp, uniqueSubsets, nums);
+        findAllUniqueSubsets(nums, 0, ans, temp);
         
-        return uniqueSubsets;
+        return ans;
     }
 };
